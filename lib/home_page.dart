@@ -28,8 +28,26 @@ class _HomePageState extends State<HomePage> {
   }
   
   Future<void> _loadModel() async {
+    final options = InterpreterOptions();
+
+    // Use XNNPACK Delegate
+    if (Platform.isAndroid) {
+      options.addDelegate(XNNPackDelegate());
+    }
+
+    // Use GPU Delegate
+    // doesn't work on emulator
+    // if (Platform.isAndroid) {
+    //   options.addDelegate(GpuDelegateV2());
+    // }
+
+    // Use Metal Delegate
+    if (Platform.isIOS) {
+      options.addDelegate(GpuDelegate());
+    }
+
     // load model
-    final Interpreter interpreter = await Interpreter.fromAsset('assets/model_unquant.tflite');
+    final Interpreter interpreter = await Interpreter.fromAsset('assets/tnoat/model_unquant.tflite', options: options);
     //final Interpreter interpreter = await Interpreter.fromAsset('assets/mobilenet_v1_1.0_224_quant.tflite');
     _inputTensor = interpreter.getInputTensors().first;
     _outputTensor = interpreter.getOutputTensors().first;
@@ -38,7 +56,7 @@ class _HomePageState extends State<HomePage> {
   
   Future<void> _loadLabels() async {
     // load label
-    final labelTxt = await rootBundle.loadString('assets/labels.txt');
+    final labelTxt = await rootBundle.loadString('assets/tnoat/labels.txt');
     //final labelTxt = await rootBundle.loadString('assets/labels_mobilenet_quant_v1_224.txt');
     _labels = labelTxt.split('\n');
   }
