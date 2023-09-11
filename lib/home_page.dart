@@ -47,8 +47,8 @@ class _HomePageState extends State<HomePage> {
     }
 
     // load model
-    //final Interpreter interpreter = await Interpreter.fromAsset('assets/tnoat/model_unquant.tflite', options: options);
-    final Interpreter interpreter = await Interpreter.fromAsset('assets/mobilenet_v1_1.0_224_quant.tflite');
+    final Interpreter interpreter = await Interpreter.fromAsset('assets/tnoat/model_unquant.tflite', options: options);
+    //final Interpreter interpreter = await Interpreter.fromAsset('assets/mobilenet_v1_1.0_224_quant.tflite');
     _inputTensor = interpreter.getInputTensors().first;
     _outputTensor = interpreter.getOutputTensors().first;
     _interpreterAddress = interpreter.address;
@@ -56,8 +56,8 @@ class _HomePageState extends State<HomePage> {
   
   Future<void> _loadLabels() async {
     // load label
-    //final labelTxt = await rootBundle.loadString('assets/tnoat/labels.txt');
-    final labelTxt = await rootBundle.loadString('assets/labels_mobilenet_quant_v1_224.txt');
+    final labelTxt = await rootBundle.loadString('assets/tnoat/labels.txt');
+    //final labelTxt = await rootBundle.loadString('assets/labels_mobilenet_quant_v1_224.txt');
     _labels = labelTxt.split('\n');
   }
 
@@ -190,7 +190,7 @@ class _HomePageState extends State<HomePage> {
 
     final input = [imageMatrix];
     // Set tensor output [1, 1001]
-    final output = [List.filled(outputShape[1],0)];
+    final output = [List.filled(outputShape[1],0.0)]; // if int use 0 if double use 0.0
     // // Run inference
     final Interpreter interpreter = Interpreter.fromAddress(interpreterAddress);
     interpreter.run(input, output);

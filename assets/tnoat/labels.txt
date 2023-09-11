@@ -1,6 +1,6 @@
-0 PlaeTnoat
-1 PlaeSpeu
-2 Ankor
-3 Khim
-4 Mengly
-5 Vannet
+PlaeTnoat
+PlaeSpeu
+Ankor
+Khim
+Mengly
+Vannet
