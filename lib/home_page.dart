@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
       options.addDelegate(GpuDelegate());
     }
 
-    // load model
+    // load model (the model must be quantized convert
     final Interpreter interpreter = await Interpreter.fromAsset('assets/tnoat/model.tflite', options: options);
     //final Interpreter interpreter = await Interpreter.fromAsset('assets/mobilenet_v1_1.0_224_quant.tflite');
     _inputTensor = interpreter.getInputTensors().first;
