@@ -125,25 +125,55 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          _imageBytes = null;
-          setState(() {
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ElevatedButton(
+              onPressed: () async {
+                _imageBytes = null;
+                setState(() {
 
-          });
-          try{
-            final Uint8List imageBytes = await _pickImage();
-            setState(() {
-              _imageBytes = imageBytes;
-              _result.clear();
-            });
+                });
+                try{
+                  final Uint8List imageBytes = await _pickImage();
+                  setState(() {
+                    _imageBytes = imageBytes;
+                    _result.clear();
+                  });
 
 
-          }catch(e){
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString()),));
-          }
-        },
-        child: const Icon(Icons.camera),
+                }catch(e){
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString()),));
+                }
+              },
+              child: const Icon(Icons.image),
+            ),
+            const SizedBox(width: 10,),
+            ElevatedButton(
+              onPressed: () async {
+                _imageBytes = null;
+                setState(() {
+
+                });
+                try{
+                  final Uint8List imageBytes = await _takePicture();
+                  setState(() {
+                    _imageBytes = imageBytes;
+                    _result.clear();
+                  });
+
+
+                }catch(e){
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString()),));
+                }
+              },
+              child: const Icon(Icons.camera),
+            ),
+          ],
+        ),
       ),
     );
   }

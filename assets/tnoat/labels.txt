@@ -1,6 +1,8 @@
-0 PlaeTnoat
-1 PlaeSpeu
-2 Ankor
-3 Khim
-4 Mengly
-5 Vannet
+ផ្លែ ត្នោត
+ផ្លែ ស្ពឺ
+អង្គរវត្ត
+សេង ឃីម
+មេង លី
+វណ្ណេត
+សីហា
+ទីណៃ
